@@ -1,6 +1,9 @@
 
 { config, pkgs, lib, inputs, ... }:
 
+let
+  cfg = import ./config.nix;
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -21,17 +24,17 @@
   };
 
   i18n = {
-    defaultLocale = "en_US.UTF-8";
+    defaultLocale = cfg.location.default;
     extraLocaleSettings = {
-      LC_ADDRESS = "de_DE.UTF-8";
-      LC_IDENTIFICATION = "de_DE.UTF-8";
-      LC_MEASUREMENT = "de_DE.UTF-8";
-      LC_MONETARY = "de_DE.UTF-8";
-      LC_NAME = "de_DE.UTF-8";
-      LC_NUMERIC = "de_DE.UTF-8";
-      LC_PAPER = "de_DE.UTF-8";
-      LC_TELEPHONE = "de_DE.UTF-8";
-      LC_TIME = "de_DE.UTF-8";
+      LC_ADDRESS = cfg.location.override;
+      LC_IDENTIFICATION = cfg.location.override;
+      LC_MEASUREMENT = cfg.location.override;
+      LC_MONETARY = cfg.location.override;
+      LC_NAME = cfg.location.override;
+      LC_NUMERIC = cfg.location.override;
+      LC_PAPER = cfg.location.override;
+      LC_TELEPHONE = cfg.location.override;
+      LC_TIME = cfg.location.override;
     };
   };
 
@@ -43,10 +46,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   programs = {
-    nix-ld = {
-      enable = true;
-      libraries = with pkgs; [ stdenv.cc.cc ];
-    };
+    nix-ld.enable = true;
     nm-applet.enable = true;
   };
 
@@ -58,14 +58,14 @@
       displayManager.lightdm.enable = true;
       desktopManager.mate.enable = true;
       xkb = {
-        layout = "de";
+        layout = cfg.keyboard.layout;
         variant = "";
       };
     };
 
     displayManager.autoLogin = {
       enable = true;
-      user = "stoating";
+      user = cfg.home.user;
     };
 
     printing.enable = true;
@@ -78,25 +78,13 @@
     };
   };
 
-  console.keyMap = "de";
-  time.timeZone = "Europe/Berlin";
+  console.keyMap = cfg.keyboard.layout;
+  time.timeZone = cfg.location.timezone;
 
-  environment.systemPackages = with pkgs; [
-    wget
-    alacritty
-    bashInteractive
-    curl
-    gnupg
-    xz
-    gnutar
-    nodejs_20
-  ];
-
-  users.users.stoating = {
+  users.users."${cfg.home.user}" = {
     isNormalUser = true;
-    description = "stoating";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ ];
+    description = cfg.home.user;
+    extraGroups = [ "wheel" ];
   };
 
   system.stateVersion = "25.05";

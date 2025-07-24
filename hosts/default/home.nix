@@ -1,9 +1,12 @@
 { config, pkgs, ... }:
 
+let
+  cfg = import ./config.nix;
+in
 {
   home = {
-    username = "stoating";
-    homeDirectory = "/home/stoating";
+    username = cfg.home.user;
+    homeDirectory = cfg.home.directory;
   };
 
   home.packages = with pkgs; [
@@ -13,8 +16,8 @@
   programs = {
     git = {
       enable = true;
-      userName = "stoating";
-      userEmail = "zack.slade@gmail.com";
+      userName = cfg.git.user;
+      userEmail = cfg.git.email;
     };
   };
 
