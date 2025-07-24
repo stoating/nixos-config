@@ -4,21 +4,20 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./user.nix
     inputs.home-manager.nixosModules.default
   ];
-
-  boot.loader.grub = {
-    enable = true;
-    device = "/dev/sda";
-    useOSProber = true;
-  };
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
       "stoating" = import ./home.nix;
     };
+  };
+
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/sda";
+    useOSProber = true;
   };
 
   i18n = {
@@ -92,6 +91,13 @@
     gnutar
     nodejs_20
   ];
+
+  users.users.stoating = {
+    isNormalUser = true;
+    description = "stoating";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [ ];
+  };
 
   system.stateVersion = "25.05";
 }
