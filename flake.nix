@@ -1,5 +1,5 @@
 {
-  description = "Nixos config flake";
+  description = "nixos config flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -12,14 +12,15 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
-    system = "x86_64-linux";
+    cfg = import ./configs/devbox.nix;
+    system = cfg.system;
   in
   {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.devbox = nixpkgs.lib.nixosSystem {
       inherit system;
 
       modules = [
-        ./hosts/default/configuration.nix
+        ./hosts/devbox/configuration.nix
         inputs.home-manager.nixosModules.default
       ];
 

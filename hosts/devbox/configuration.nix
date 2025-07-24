@@ -2,7 +2,7 @@
 { config, pkgs, lib, inputs, ... }:
 
 let
-  cfg = import ./config.nix;
+  cfg = import ../../configs/devbox.nix;
 in
 {
   imports = [
@@ -12,9 +12,7 @@ in
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
-    users = {
-      "stoating" = import ./home.nix;
-    };
+    users.${cfg.home.user} = import ./home.nix;
   };
 
   boot.loader.grub = {
@@ -67,21 +65,12 @@ in
       enable = true;
       user = cfg.home.user;
     };
-
-    printing.enable = true;
-
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
   };
 
   console.keyMap = cfg.keyboard.layout;
   time.timeZone = cfg.location.timezone;
 
-  users.users."${cfg.home.user}" = {
+  users.users.${cfg.home.user} = {
     isNormalUser = true;
     description = cfg.home.user;
     extraGroups = [ "wheel" ];

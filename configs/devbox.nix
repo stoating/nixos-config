@@ -1,7 +1,7 @@
 {
   git = {
     user = "stoating";
-    email = "zack.slade@gmail.com";
+    email = "stoating.around@gmail.com";
   };
 
   home = {
@@ -18,4 +18,7 @@
     override = "de_DE.UTF-8";
     timezone = "Europe/Berlin";
   };
+
+  system = "x86_64-linux"; # Intel/AMD
+  # system = "aarch64-linux"; # ARM
 }
