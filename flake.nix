@@ -19,16 +19,12 @@
     nixosConfigurations.devbox = nixpkgs.lib.nixosSystem {
       inherit system;
 
+      specialArgs = { inherit inputs; };
+
       modules = [
         ./hosts/devbox/configuration.nix
         inputs.home-manager.nixosModules.default
       ];
-
-      pkgs = import nixpkgs {
-        inherit system;
-      };
-
-      specialArgs = { inherit inputs; };
     };
   };
 }

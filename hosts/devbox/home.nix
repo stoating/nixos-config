@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  cfg = import ../../configs/devbox.nix;
+  cfg = import ../../configs/_devbox.nix;
 in
 {
   home = {
@@ -10,10 +10,20 @@ in
   };
 
   home.packages = with pkgs; [
+    bash
+    direnv
     git
+    nix-direnv
   ];
 
   programs = {
+    bash = {
+      enable = true;
+    };
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
     git = {
       enable = true;
       userName = cfg.git.user;

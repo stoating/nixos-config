@@ -5,8 +5,8 @@
   };
 
   home = {
-    user = "stoating";
-    directory = "/home/stoating";
+    user = "dbox";
+    directory = "/home/dbox";
   };
 
   keyboard = {
@@ -19,6 +19,5 @@
     timezone = "Europe/Berlin";
   };
 
-  system = "x86_64-linux"; # Intel/AMD
-  # system = "aarch64-linux"; # ARM
+  system = "x86_64-linux";
 }

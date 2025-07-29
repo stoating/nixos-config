@@ -2,7 +2,7 @@
 { config, pkgs, lib, inputs, ... }:
 
 let
-  cfg = import ../../configs/devbox.nix;
+  cfg = import ../../configs/_devbox.nix;
 in
 {
   imports = [
@@ -12,6 +12,7 @@ in
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
+    useGlobalPkgs = true;
     users.${cfg.home.user} = import ./home.nix;
   };
 
