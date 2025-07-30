@@ -24,7 +24,7 @@ echo "[3/6] Cloning repo..."
 git clone git@github.com:stoating/nixos-config.git "$home_directory/nixos"
 
 echo "[4/6] Generating default config with your config..."
-cat > "$home_directory/nixos/devbox/_devbox.nix" <<EOF
+cat > "$home_directory/nixos/hosts/devbox/_devbox.nix" <<EOF
 {
   git = {
     user = "${git_user}";
