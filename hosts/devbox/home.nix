@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  cfg = import ../../configs/_devbox.nix;
+  cfg = import ./_devbox.nix;
 in
 {
   home = {
