@@ -12,7 +12,7 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
-    cfg = import ./configs/devbox.nix;
+    cfg = import ./hosts/devbox/_devbox.nix;
     system = cfg.system;
   in
   {
