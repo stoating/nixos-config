@@ -3,7 +3,7 @@
 # --- Configuration Variables ---
 git_user="todo"
 git_email="todo@gmail.com"
-keyboard_layout="en"
+keyboard_layout="us"
 locale_default="en_US.UTF-8"
 locale_override="en_US.UTF-8"
 timezone="Europe/Berlin"
