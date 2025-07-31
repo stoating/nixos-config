@@ -14,6 +14,7 @@ in
     direnv
     git
     nix-direnv
+    ripgrep
   ];
 
   programs = {
@@ -28,6 +29,9 @@ in
       enable = true;
       userName = cfg.git.user;
       userEmail = cfg.git.email;
+    };
+    ripgrep = {
+      enable = true;
     };
   };
 
