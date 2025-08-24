@@ -38,6 +38,7 @@ in
   };
 
   networking = {
+    # 7080: clojure-mcp
     firewall.allowedTCPPorts = [ 7080 ];
     hostName = "nixos";
     networkmanager.enable = true;

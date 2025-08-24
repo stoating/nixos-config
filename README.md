@@ -21,9 +21,11 @@ accessed over SSH with any IDE.
    (e.g. git user, email, locales).
 3. Run the bootstrap script on the VM to clone this repository and install the
    devbox configuration:
+
    ```bash
    ./bootstrap/devbox.sh
    ```
+
    The script clones the repository to `~/nixos`, writes a `_devbox.nix` with
    your settings, copies your hardware configuration, and rebuilds the system
    using the flake.
