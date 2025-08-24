@@ -38,6 +38,7 @@ in
   };
 
   networking = {
+    firewall.allowedTCPPorts = [ 7080 ];
     hostName = "nixos";
     networkmanager.enable = true;
   };
